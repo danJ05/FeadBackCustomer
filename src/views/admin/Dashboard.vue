@@ -7,7 +7,7 @@
           <span>DASHBOARD</span>
         </v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn text>
+        <v-btn text @click="logout">
           <span>Se deconnecter</span>
           <v-icon medium color="red darken-2" right>mdi-exit-to-app</v-icon>
         </v-btn>
@@ -19,7 +19,7 @@
             <v-list-item two-line :class="miniVariant && 'px-0'">
               <v-list-item-avatar>
                 <v-avatar color="red" size="35">
-                  <span class="white--text">MD</span>
+                  <span class="white--text">{{ admin.nom.charAt(0) }}</span>
                 </v-avatar>
               </v-list-item-avatar>
 
@@ -30,7 +30,6 @@
             </v-list-item>
 
             <v-divider></v-divider>
-
             <v-list-item
               v-for="item in items"
               :key="item.title"
@@ -63,8 +62,15 @@ export default {
     return {
       admin: "",
       tokenAdmin: "",
+      initial: "",
       drawer: false,
       items: [
+        { title: "Dashboard", icon: "mdi-view-dashboard", route: "/dashboard" },
+        {
+          title: "Utilisateurs",
+          icon: "mdi-account-group",
+          route: "/admin/users",
+        },
         {
           title: "Questionnaire",
           icon: "mdi-comment-question-outline",
@@ -86,23 +92,31 @@ export default {
       expandOnHover: true,
     };
   },
+  computed: {
+    // getInitials: function() {
+    //   var nom = this.admin.nom;
+    //   var prenoms = this.admin.prenoms;
+    //   return nom.charAt(0) + prenoms.charAt(0);
+    // },
+  },
   methods: {
     logout() {
       localStorage.clear();
       this.$router.push("/admin");
-      console.log("logged out!");
+      // console.log("logged out!");
     },
   },
-  mounted() {
+  async mounted() {
     // console.log(localStorage.getItem("tokenAdmin"));
-    axios
+    await axios
       .get("http://localhost:3000/api/admin", {
         headers: { token: localStorage.getItem("tokenAdmin") },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.admin = res.data;
-        console.log(res.data.msg);
+        // console.log(res.data.msg);
+        // console.log(this.admin);
       })
       .catch((error) => console.log(error));
   },
