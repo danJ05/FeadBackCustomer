@@ -1,29 +1,94 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
+// import Home from '../views/Home.vue'
+import LoginPage from "../views/LoginPage";
+import Register from "../views/Register";
+import Dashboard from "../views/admin/Dashboard";
+import AdminLogin from "../views/admin/AdminLogin";
+import Questions from "../views/admin/Questions";
+import NotFound from "../views/NotFound.vue";
+import Menu from "../components/Menu.vue";
+import Profile from "../components/Profile.vue";
+import RatingPage from "../views/RatingPage.vue";
+import Suggestion from "../components/Suggestions.vue";
+import Preoccupation from "../components/Preoccupation.vue";
+import UserPage from "../views/UserPage.vue";
+import Preoccup from "../views/admin/Preoccup.vue";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
-  const routes = [
+const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/",
+    redirect: "/connexion",
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+    path: "/connexion",
+    name: "LoginPage",
+    component: LoginPage,
+  },
+  {
+    path: "/inscription",
+    name: "Register",
+    component: Register,
+  },
+  {
+    path: "/user",
+    name: "UserPage",
+    component: UserPage,
+    children: [
+      {
+        path: "/menu",
+        component: Menu,
+      },
+      {
+        path: "/profil",
+        component: Profile,
+      },
+      {
+        path: "/rating",
+        component: RatingPage,
+      },
+      {
+        path: "/suggestions",
+        component: Suggestion,
+      },
+      {
+        path: "/preoccupation",
+        component: Preoccupation,
+      },
+    ],
+  },
+  {
+    path: "/admin",
+    redirect: "/admin/login",
+  },
+  {
+    path: "/admin/login",
+    component: AdminLogin,
+  },
+  {
+    path: "/dashboard",
+    component: Dashboard,
+    children: [
+      {
+        path: "/questions",
+        component: Questions,
+      },
+      {
+        path: "/list-preoccupation",
+        component: Preoccup,
+      },
+    ],
+  },
+  { path: "/404", component: NotFound },
+  { path: "*", redirect: "/404" },
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
