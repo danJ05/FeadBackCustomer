@@ -19,19 +19,9 @@
           <b-button @click="valider" block variant="primary">Ajouter</b-button>
         </div>
       </div>
-      <div class="col-md mx-auto">
-        <b-button
-          class="success block"
-          style="color: white;"
-          block
-          tile
-          outlined
-          color="success"
-          to="/view-questions"
-        >
-          Voir les questions
-        </b-button>
-      </div>
+      <v-btn class="ma-2" block tile outlined color="success">
+        Voir les questions
+      </v-btn>
     </div>
     <v-snackbar
       :bottom="y === 'bottom'"
@@ -55,7 +45,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "Questionnaire",
+  name: "ListQuestion",
   data() {
     return {
       admin: "",
@@ -75,7 +65,6 @@ export default {
     async valider() {
       const credentials = {
         content: this.content,
-        id_admin: this.admin.admin_id,
       };
       await axios
         .post("http://localhost:3000/api/question", credentials)
@@ -114,7 +103,7 @@ export default {
         // console.log(res.data);
         this.admin = res.data;
         // console.log(res.data.msg);
-        console.log(this.admin);
+        // console.log(this.admin);
       })
       .catch((error) => console.log(error));
   },

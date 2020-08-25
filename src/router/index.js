@@ -15,6 +15,8 @@ import Preoccupation from "../components/Preoccupation.vue";
 import UserPage from "../views/UserPage.vue";
 import Preoccup from "../views/admin/Preoccup.vue";
 import AdminUsers from "../views/admin/AdminUsers.vue";
+import ReponsesQuestions from "../views/admin/ReponsesQuestions.vue";
+import VueReponses from "../views/admin/VueReponses.vue";
 
 Vue.use(VueRouter);
 
@@ -83,6 +85,15 @@ const routes = [
       {
         path: "/admin/users",
         component: AdminUsers,
+      },
+      {
+        path: "/view-questions",
+        component: ReponsesQuestions,
+      },
+      {
+        path: "/view-questions/:id",
+        name: "responses_to_questions",
+        component: VueReponses,
       },
     ],
   },

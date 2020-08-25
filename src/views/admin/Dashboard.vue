@@ -19,7 +19,7 @@
             <v-list-item two-line :class="miniVariant && 'px-0'">
               <v-list-item-avatar>
                 <v-avatar color="red" size="35">
-                  <span class="white--text">{{ admin.nom.charAt(0) }}</span>
+                  <span class="white--text">A</span>
                 </v-avatar>
               </v-list-item-avatar>
 

@@ -15,6 +15,7 @@
           <v-card-title>
             <v-text-field
               v-model="search"
+              :key="'user_search'"
               append-icon="mdi-magnify"
               label="Rechercher"
               single-line
@@ -22,15 +23,59 @@
             ></v-text-field>
           </v-card-title>
           <v-card-text>
-            <v-data-table
-              locale="fr-FR"
-              :headers="headers"
-              :items="list_users.listusers"
-              :sort-by="['nom']"
-              item-key="id"
-              :search="search"
-              class="elevation-0"
-            ></v-data-table>
+            <div v-if="!list_users.listusers">
+              <v-skeleton-loader
+                ref="skeleton"
+                :type="'table-row'"
+                class="mx-auto"
+              ></v-skeleton-loader>
+              <v-skeleton-loader
+                ref="skeleton"
+                :type="'table-row'"
+                class="mx-auto"
+              ></v-skeleton-loader>
+              <v-skeleton-loader
+                ref="skeleton"
+                :type="'table-row'"
+                class="mx-auto"
+              ></v-skeleton-loader>
+              <v-skeleton-loader
+                ref="skeleton"
+                :type="'table-row'"
+                class="mx-auto"
+              ></v-skeleton-loader>
+              <v-skeleton-loader
+                ref="skeleton"
+                :type="'table-row'"
+                class="mx-auto"
+              ></v-skeleton-loader>
+              <v-skeleton-loader
+                ref="skeleton"
+                :type="'table-row'"
+                class="mx-auto"
+              ></v-skeleton-loader>
+              <v-skeleton-loader
+                ref="skeleton"
+                :type="'table-row'"
+                class="mx-auto"
+              ></v-skeleton-loader>
+              <v-skeleton-loader
+                ref="skeleton"
+                :type="'table-row'"
+                class="mx-auto"
+              ></v-skeleton-loader>
+            </div>
+            <div v-else>
+              <v-data-table
+                locale="fr-FR"
+                :headers="headers"
+                :items="list_users.listusers"
+                :sort-by="['nom']"
+                item-key="id"
+                :search="search"
+                class="elevation-0"
+              ></v-data-table>
+            </div>
           </v-card-text>
         </v-card>
       </v-tab-item>
@@ -39,6 +84,7 @@
           <v-card-title>
             <v-text-field
               v-model="search"
+              :key="'admin_search'"
               append-icon="mdi-magnify"
               label="Rechercher"
               single-line
@@ -46,91 +92,135 @@
             ></v-text-field>
           </v-card-title>
           <v-card-text>
-            <v-data-table
-              locale="fr-FR"
-              :headers="headers2"
-              :items="list_admin.listadmin"
-              :sort-by="['nom']"
-              item-key="id"
-              :search="search"
-              class="elevation-0"
-            >
-              <template v-slot:top>
-                <v-toolbar flat color="white">
-                  <v-spacer></v-spacer>
-                  <v-dialog v-model="dialog" max-width="500px">
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-btn
-                        color="primary"
-                        dark
-                        class="mb-2"
-                        v-bind="attrs"
-                        v-on="on"
-                        >Ajouter un admin</v-btn
-                      >
-                    </template>
-                    <v-card>
-                      <v-card-text>
-                        <v-container>
-                          <v-row>
-                            <v-col cols="12" sm="6" md="6">
-                              <v-text-field
-                                v-model="editedItem.admin_id"
-                                label="Identifiant"
-                              ></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="6" md="6">
-                              <v-text-field
-                                v-model="editedItem.mdp"
-                                :type="'password'"
-                                label="Mot de passe"
-                              ></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="6" md="6">
-                              <v-text-field
-                                v-model="editedItem.nom"
-                                label="Nom"
-                              ></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="6" md="6">
-                              <v-text-field
-                                v-model="editedItem.prenoms"
-                                label="Prenoms"
-                              ></v-text-field>
-                            </v-col>
-                            <v-col cols="12" sm="12" md="12">
-                              <v-text-field
-                                v-model="editedItem.email"
-                                :type="'email'"
-                                label="Email"
-                              ></v-text-field>
-                            </v-col>
-                          </v-row>
-                        </v-container>
-                      </v-card-text>
+            <div v-if="!list_users.listusers">
+              <v-skeleton-loader
+                ref="skeleton"
+                :type="'table-row'"
+                class="mx-auto"
+              ></v-skeleton-loader>
+              <v-skeleton-loader
+                ref="skeleton"
+                :type="'table-row'"
+                class="mx-auto"
+              ></v-skeleton-loader>
+              <v-skeleton-loader
+                ref="skeleton"
+                :type="'table-row'"
+                class="mx-auto"
+              ></v-skeleton-loader>
+              <v-skeleton-loader
+                ref="skeleton"
+                :type="'table-row'"
+                class="mx-auto"
+              ></v-skeleton-loader>
+              <v-skeleton-loader
+                ref="skeleton"
+                :type="'table-row'"
+                class="mx-auto"
+              ></v-skeleton-loader>
+              <v-skeleton-loader
+                ref="skeleton"
+                :type="'table-row'"
+                class="mx-auto"
+              ></v-skeleton-loader>
+              <v-skeleton-loader
+                ref="skeleton"
+                :type="'table-row'"
+                class="mx-auto"
+              ></v-skeleton-loader>
+              <v-skeleton-loader
+                ref="skeleton"
+                :type="'table-row'"
+                class="mx-auto"
+              ></v-skeleton-loader>
+            </div>
+            <div v-else>
+              <v-data-table
+                locale="fr-FR"
+                :headers="headers2"
+                :items="list_admin.listadmin"
+                :sort-by="['nom']"
+                item-key="id"
+                :search="search"
+                class="elevation-0"
+              >
+                <template v-slot:top>
+                  <v-toolbar flat color="white">
+                    <v-spacer></v-spacer>
+                    <v-dialog v-model="dialog" max-width="500px">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                          color="primary"
+                          dark
+                          class="mb-2"
+                          v-bind="attrs"
+                          v-on="on"
+                          >Ajouter un admin</v-btn
+                        >
+                      </template>
+                      <v-card>
+                        <v-card-text>
+                          <v-container>
+                            <v-row>
+                              <v-col cols="12" sm="6" md="6">
+                                <v-text-field
+                                  v-model="editedItem.admin_id"
+                                  label="Identifiant"
+                                ></v-text-field>
+                              </v-col>
+                              <v-col cols="12" sm="6" md="6">
+                                <v-text-field
+                                  v-model="editedItem.mdp"
+                                  :type="'password'"
+                                  label="Mot de passe"
+                                ></v-text-field>
+                              </v-col>
+                              <v-col cols="12" sm="6" md="6">
+                                <v-text-field
+                                  v-model="editedItem.nom"
+                                  label="Nom"
+                                ></v-text-field>
+                              </v-col>
+                              <v-col cols="12" sm="6" md="6">
+                                <v-text-field
+                                  v-model="editedItem.prenoms"
+                                  label="Prenoms"
+                                ></v-text-field>
+                              </v-col>
+                              <v-col cols="12" sm="12" md="12">
+                                <v-text-field
+                                  v-model="editedItem.email"
+                                  :type="'email'"
+                                  label="Email"
+                                ></v-text-field>
+                              </v-col>
+                            </v-row>
+                          </v-container>
+                        </v-card-text>
 
-                      <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="blue darken-1" text @click="close"
-                          >Annuler</v-btn
-                        >
-                        <v-btn color="blue darken-1" text @click="save"
-                          >Enregistrer</v-btn
-                        >
-                      </v-card-actions>
-                    </v-card>
-                  </v-dialog>
-                </v-toolbar>
-              </template>
-              <template v-slot:[`item.actions`]="{ item }">
-                <!-- <v-icon small class="mr-2" @click="editItem(item)">
+                        <v-card-actions>
+                          <v-spacer></v-spacer>
+                          <v-btn color="blue darken-1" text @click="close"
+                            >Annuler</v-btn
+                          >
+                          <v-btn color="blue darken-1" text @click="save"
+                            >Enregistrer</v-btn
+                          >
+                        </v-card-actions>
+                      </v-card>
+                    </v-dialog>
+                  </v-toolbar>
+                </template>
+                <template v-slot:[`item.actions`]="{ item }">
+                  <!-- <v-icon small class="mr-2" @click="editItem(item)">
                   mdi-pencil
                 </v-icon> -->
-                <v-icon small @click="deleteItem(item)">
-                  mdi-delete
-                </v-icon>
-              </template>
-            </v-data-table>
+                  <v-icon small @click="deleteItem(item)">
+                    mdi-delete
+                  </v-icon>
+                </template>
+              </v-data-table>
+            </div>
           </v-card-text>
         </v-card>
       </v-tab-item>
@@ -254,10 +344,10 @@ export default {
         // console.log(this.adminC[0].nom);
         const credentials = {
           admin_id: this.adminC[0].admin_id,
-          mdp: this.adminC[0].admin_id,
+          mdp: this.adminC[0].mdp,
           nom: this.adminC[0].nom,
           prenoms: this.adminC[0].prenoms,
-          email: this.adminC[0].admin_id,
+          email: this.adminC[0].email,
         };
         await axios
           .post("http://localhost:3000/api/addAdmin", credentials)
@@ -274,10 +364,11 @@ export default {
                 (this.promotion = ""),
                 (this.snack = true);
               this.msg = "";
-              this.$router.go();
+              // this.$router.go();
             } else {
               this.msg = res.data.msg;
-              //   console.log(this.msg);
+              this.snack = true;
+              console.log(this.msg);
             }
           })
           .catch((err) => {
