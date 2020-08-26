@@ -1,6 +1,18 @@
 <template>
   <div>
-    <h1 class="mb-5">Faire des suggestions</h1>
+    <div class="row">
+      <div class="col-md-9"><h1 class="mb-5">Faire des suggestions</h1></div>
+      <div class="col-md-3">
+        <router-link
+          type
+          class="btn primary"
+          style="color:white;"
+          to="/suggestions/list"
+        >
+          Voir mes suggestions
+        </router-link>
+      </div>
+    </div>
     <div class="col-md-8 col-sm-12 m-3 mx-auto">
       <div class="text-center shadow-sm p-2 bg-white p-5">
         <form action="/someW" @submit.prevent="submit">

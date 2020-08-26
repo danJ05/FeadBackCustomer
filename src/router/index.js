@@ -17,6 +17,8 @@ import Preoccup from "../views/admin/Preoccup.vue";
 import AdminUsers from "../views/admin/AdminUsers.vue";
 import ReponsesQuestions from "../views/admin/ReponsesQuestions.vue";
 import VueReponses from "../views/admin/VueReponses.vue";
+import ListSuggest from "../views/ListSuggest.vue";
+import ListPreo from "../views/ListPreo.vue";
 
 Vue.use(VueRouter);
 
@@ -57,8 +59,16 @@ const routes = [
         component: Suggestion,
       },
       {
+        path: "/suggestions/list",
+        component: ListSuggest,
+      },
+      {
         path: "/preoccupation",
         component: Preoccupation,
+      },
+      {
+        path: "/preoccupation/list",
+        component: ListPreo,
       },
     ],
   },

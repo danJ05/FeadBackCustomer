@@ -96,7 +96,7 @@ export default {
           this.snack2 = true;
         });
 
-      axios.post("http://localhost:3000/api/question");
+      // axios.post("http://localhost:3000/api/question");
     },
     logout() {
       localStorage.clear();
