@@ -3,14 +3,14 @@
     <div class="row">
       <div class="col-md-9"><h1 class="mb-5">Faire des suggestions</h1></div>
       <div class="col-md-3">
-        <router-link
+        <button
           type
           class="btn primary"
           style="color:white;"
-          to="/suggestions/list"
+          @click="hey(user.id)"
         >
           Voir mes suggestions
-        </router-link>
+        </button>
       </div>
     </div>
     <div class="col-md-8 col-sm-12 m-3 mx-auto">
@@ -56,6 +56,9 @@ export default {
     };
   },
   methods: {
+    async hey(id) {
+      this.$router.push(`/suggestions/list/${id}`);
+    },
     async submit() {
       try {
         let preo = {

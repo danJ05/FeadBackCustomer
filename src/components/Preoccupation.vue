@@ -1,6 +1,18 @@
 <template>
   <div>
-    <h1 class="mb-5">Poser des préoccupations</h1>
+    <div class="row">
+      <div class="col-md-9"><h1 class="mb-5">Poser des préoccupations</h1></div>
+      <div class="col-md-3">
+        <button
+          type
+          class="btn primary"
+          style="color:white;"
+          @click="hey(user.id)"
+        >
+          Voir mes préoccupations
+        </button>
+      </div>
+    </div>
     <div class="col-md-8 col-sm-12 m-3 mx-auto">
       <div class="text-center shadow-sm bg-white p-5">
         <form @submit.prevent="submit">
@@ -44,6 +56,9 @@ export default {
     };
   },
   methods: {
+    async hey(id) {
+      this.$router.push(`/preoccupation/list/${id}`);
+    },
     async submit() {
       try {
         let preo = {

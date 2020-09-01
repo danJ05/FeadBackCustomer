@@ -9,7 +9,7 @@
           <p class="myHeader">Hey</p>
           <ListItems url="/menu" link="menu" iIcon="home" iText="Acceuil" />
           <ListItems
-            url="/rating"
+            url="/choix"
             link="rating"
             iIcon="smile-beam"
             iText="Satisfaction"

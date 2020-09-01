@@ -10,6 +10,7 @@ import NotFound from "../views/NotFound.vue";
 import Menu from "../components/Menu.vue";
 import Profile from "../components/Profile.vue";
 import RatingPage from "../views/RatingPage.vue";
+import Rating from "../views/Rating.vue";
 import Suggestion from "../components/Suggestions.vue";
 import Preoccupation from "../components/Preoccupation.vue";
 import UserPage from "../views/UserPage.vue";
@@ -55,11 +56,15 @@ const routes = [
         component: RatingPage,
       },
       {
+        path: "/choix",
+        component: Rating,
+      },
+      {
         path: "/suggestions",
         component: Suggestion,
       },
       {
-        path: "/suggestions/list",
+        path: "/suggestions/list/:id",
         component: ListSuggest,
       },
       {
@@ -67,7 +72,7 @@ const routes = [
         component: Preoccupation,
       },
       {
-        path: "/preoccupation/list",
+        path: "/preoccupation/list/:id",
         component: ListPreo,
       },
     ],
