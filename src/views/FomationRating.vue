@@ -1,11 +1,17 @@
 <template>
   <div>
-    <div><h1>Mes suggestions</h1></div>
-    <div v-for="(item, i) in list" :key="i">
-      <div class="row">
-        <div class="card col-md-6 mx-auto m-4 p-4">
-          <div class="display-1 mb-2">Service : {{ item.service }}</div>
-          <div class="">{{ item.text }}</div>
+    <div><h1>Formations</h1></div>
+    <div class="row">
+      <div class="card col-md-6 mx-auto m-4 p-4">
+        <div class="row">
+          <div class="col-md-9">
+            Steward
+          </div>
+
+          <v-rating v-model="rating"></v-rating>
+          <button @click="viewFormation()" class="btn btn-block col-md-6">
+            Noter
+          </button>
         </div>
       </div>
     </div>
@@ -15,7 +21,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "ListSuggest",
+  name: "ListFormation",
   data() {
     return {
       token: "",
@@ -41,7 +47,9 @@ export default {
     // console.log(this.$route.params.id);
 
     await axios
-      .get(`http://localhost:3000/api/suggest/${this.$route.params.id}`)
+      .get(
+        `http://localhost:3000/api/formation/${this.$route.params.id_sondage}`
+      )
       .then((res) => {
         console.log(res.data);
         this.list = res.data.list;

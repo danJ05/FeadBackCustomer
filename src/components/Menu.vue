@@ -1,10 +1,17 @@
 <template>
   <div>
+    <!-- <div v-if="user.nom === null || user.nom === undefined">
+      {{ this.$router.push("/connexion") }}
+    </div> -->
     <div class="row align-self-center align-items-center">
-      <div class="col-md-12 col-sm-12 mb-3">
+      <div class="col-md-12 col-sm-12">
         <v-alert text color="info">
-          <div><span>Bonjour</span> {{ user.nom }}</div>
+          <div class="display-1 text-capitalize font-weight-bold">
+            <span>{{ salute }}</span> {{ user.nom }}
+          </div>
         </v-alert>
+
+        <!-- <vue-speech /> -->
         <div class="text-center shadow-sm p-2 bg-white">
           <img
             class="img-fluid"
@@ -12,60 +19,13 @@
             src="../assets/user_interface.svg"
           />
           <div class="col">
-            <p class="sub">Enquête de statisfaction</p>
+            <p class="sub">Participer au sondage</p>
           </div>
           <div class="text-black-50">
-            Donnez votre avis sur nos services.
+            Donnez votre avis sur nos differentes prestations.
           </div>
           <div class="col">
-            <router-link to="/rating"
-              ><button class="boutton">Aller</button></router-link
-            >
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row align-self-center align-items-center my-3">
-      <div class="col-md-6 col-sm-12 mb-3">
-        <div class="text-center shadow-sm p-2 bg-white">
-          <img
-            class="img-fluid"
-            width="200px"
-            src="../assets/question_isometric.svg"
-          />
-          <div class="col">
-            <p class="sub">Préoccupation</p>
-          </div>
-          <div class="text-black-50">
-            Vous rencontrez des problèmes ? Faites nous en part.
-          </div>
-          <div class="col">
-            <router-link to="/preoccupation"
-              ><button class="boutton">Aller</button></router-link
-            >
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-12">
-        <div class="text-center shadow-sm p-2 bg-white">
-          <img
-            class="img-fluid"
-            width="200px"
-            src="../assets/receptionist_isometric.svg"
-          />
-          <div class="col">
-            <p class="sub">Suggestions</p>
-          </div>
-          <div class="text-black-50">
-            Vous avez des suggestions ? Veuillez nous les soumettre.
-          </div>
-          <div class="col">
-            <router-link to="/suggestions"
-              ><button class="boutton">
-                Aller
-              </button></router-link
-            >
+            <button class="boutton" @click="voirList(user.id)">Aller</button>
           </div>
         </div>
       </div>
@@ -75,6 +35,7 @@
 
 <script>
 import axios from "axios";
+
 export default {
   name: "Menu",
   data() {
@@ -82,6 +43,20 @@ export default {
       token: "",
       user: "",
     };
+  },
+  computed: {
+    salute: function() {
+      var today = new Date();
+      var curHr = today.getHours();
+
+      if (curHr < 12) {
+        return "Bonjour";
+      } else if (curHr < 18) {
+        return "Bonsoir";
+      } else {
+        return "Bonsoir";
+      }
+    },
   },
   mounted() {
     axios
@@ -93,14 +68,24 @@ export default {
       })
       .catch((error) => console.log(error));
   },
+  //
   created() {
-    if (localStorage.getItem("token") === null) {
+    if (
+      localStorage.getItem("token") === null ||
+      localStorage.getItem("token") === undefined ||
+      this.user.nom === null
+    ) {
       this.$router.push("/connexion");
     } else {
       this.token = localStorage.getItem("token");
     }
   },
-  methods: {},
+  methods: {
+    voirList(id) {
+      console.log(id);
+      this.$router.push(`/sondage/list/${id}`);
+    },
+  },
 };
 </script>
 

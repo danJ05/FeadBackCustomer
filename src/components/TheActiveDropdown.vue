@@ -2,7 +2,7 @@
   <div>
     <b-dropdown variant="text" toggle-class="text-decoration-none">
       <template v-slot:button-content>
-        <b-avatar text="JD" fluid size="3rem"></b-avatar
+        <b-avatar :text="getInitials()" fluid size="3rem"></b-avatar
         ><span class="ml-2">{{ votreNom }}</span>
       </template>
       <b-dropdown-item to="/profil">Profil</b-dropdown-item>
@@ -23,6 +23,9 @@ export default {
       this.$router.push("/connexion");
       console.log("logged out!");
     },
+    getInitials() {
+      return this.user.nom.charAt(0);
+    },
   },
 
   data() {
@@ -42,7 +45,10 @@ export default {
       .catch((err) => console.log(err));
   },
   created() {
-    if (localStorage.getItem("token") === null) {
+    if (
+      localStorage.getItem("token") === null ||
+      localStorage.getItem("token") === undefined
+    ) {
       this.$router.push("/connexion");
     } else {
       this.token = localStorage.getItem("token");
@@ -52,10 +58,6 @@ export default {
     votreNom() {
       if (this.user.prenom === null) return this.user.nom;
       return this.user.nom + " " + this.user.prenom;
-    },
-    getInitials() {
-      if (this.user.prenom === null) return this.user.nom.charAt(0);
-      return this.user.nom.charAt(0) + this.user.prenom.charAt(0);
     },
   },
 };

@@ -1,11 +1,10 @@
 <template>
   <div>
-    <div><h1>Mes suggestions</h1></div>
+    <div><h1>Prestations</h1></div>
     <div v-for="(item, i) in list" :key="i">
       <div class="row">
         <div class="card col-md-6 mx-auto m-4 p-4">
-          <div class="display-1 mb-2">Service : {{ item.service }}</div>
-          <div class="">{{ item.text }}</div>
+          <div class="display-1 mb-2">Service : {{ item.libelle }}</div>
         </div>
       </div>
     </div>
@@ -15,7 +14,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "ListSuggest",
+  name: "ListPrestation",
   data() {
     return {
       token: "",

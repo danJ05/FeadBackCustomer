@@ -6,25 +6,13 @@
           <h3>Header</h3>
         </div>
         <ul class="list-unstyled components">
-          <p class="myHeader">Hey</p>
-          <ListItems url="/menu" link="menu" iIcon="home" iText="Acceuil" />
+          <!-- <p class="myHeader">Hey</p> -->
+          <ListItems url="/menu" link="menu" iIcon="home" iText="Accueil" />
           <ListItems
-            url="/choix"
+            :url="'/sondage/list/' + user.id"
             link="rating"
             iIcon="smile-beam"
             iText="Satisfaction"
-          />
-          <ListItems
-            url="/preoccupation"
-            link="preoccupation"
-            iIcon="question"
-            iText="Préoccupation"
-          />
-          <ListItems
-            url="/suggestions"
-            link="suggestions"
-            iIcon="lightbulb"
-            iText="Suggestions"
           />
         </ul>
       </nav>
@@ -80,7 +68,10 @@ export default {
       .catch((err) => console.log(err));
   },
   created() {
-    if (localStorage.getItem("token") === null) {
+    if (
+      localStorage.getItem("token") === null ||
+      localStorage.getItem("token") === undefined
+    ) {
       this.$router.push("/connexion");
     } else {
       this.token = localStorage.getItem("token");

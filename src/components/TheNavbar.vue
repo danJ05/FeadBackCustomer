@@ -7,7 +7,7 @@
     </div>
 
     <img
-      src="../assets/komptech.png"
+      src="../assets/Picture1.png"
       class="my-0 mr-md-auto img-fluid"
       style="height: 50px"
       alt="Logo"
@@ -40,6 +40,7 @@ export default {
 <style lang="css" scoped>
 nav {
   background-color: #fff !important;
+  margin-bottom: 10px !important;
 }
 
 nav .text-dark:hover {

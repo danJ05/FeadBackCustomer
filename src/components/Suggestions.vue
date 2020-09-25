@@ -88,7 +88,10 @@ export default {
       .catch((error) => console.log(error));
   },
   created() {
-    if (localStorage.getItem("token") === null) {
+    if (
+      localStorage.getItem("token") === null ||
+      localStorage.getItem("token") === undefined
+    ) {
       this.$router.push("/connexion");
     } else {
       this.token = localStorage.getItem("token");

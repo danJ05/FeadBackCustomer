@@ -1,9 +1,9 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-8 mx-auto">
+      <div class="col-md-6 mx-auto">
         <form v-on:submit.prevent="register" method="POST">
-          <h1>Inscrire un nouveau client</h1>
+          <h1>Inscription</h1>
           <p v-if="msg">
             <v-alert text type="error">{{ msg }}</v-alert>
           </p>
@@ -48,7 +48,7 @@
             ></b-form-input>
           </div>
           <div class="form-group">
-            <label for="nom">Nom du client</label>
+            <label for="nom">Votre nom (ou nom de la structure)</label>
             <b-form-input
               id="nom"
               type="text"
@@ -57,7 +57,7 @@
               required
             ></b-form-input>
           </div>
-          Le client est un(e) :
+          Vous êtes :
           <div class="form-group">
             <div class="radio-buttons">
               <label class="custom-radio">
@@ -66,7 +66,7 @@
                   <span class="icon"><b-icon icon="check"></b-icon></span>
                   <div class="status-icon text-center">
                     <img class="img-fluid" src="../assets/businessman.svg" />
-                    <h3>Entreprise</h3>
+                    <h3>Client</h3>
                   </div>
                 </span>
               </label>
@@ -77,7 +77,7 @@
                   <span class="icon"><b-icon icon="check"></b-icon></span>
                   <div class="status-icon text-center">
                     <img class="img-fluid" src="../assets/school.svg" />
-                    <h3>Apprenant</h3>
+                    <h3>Etudiant</h3>
                   </div>
                 </span>
               </label>
@@ -102,8 +102,6 @@
                 id="dateNais"
                 v-model="dateNais"
                 class="mb-2"
-                required
-                :initial-date="'1992-01-01'"
               ></b-form-datepicker>
             </div>
 
@@ -136,7 +134,7 @@
 
           <div v-if="statut == 'client'">
             <div class="form-group">
-              <label for="prenoms">Activité :</label>
+              <label for="prenoms">Activités :</label>
               <v-select
                 :items="itemsActivites"
                 :multiple="true"
@@ -145,7 +143,9 @@
             </div>
 
             <div class="form-group">
-              <label for="prenoms">Prestation réalisée :</label>
+              <label for="prenoms"
+                >Prestations que KOMPTECH-CIMAT a réalisées pour vous :</label
+              >
               <v-select
                 :items="itemsPrestation"
                 :multiple="true"
@@ -155,15 +155,15 @@
           </div>
           <div class="form-group">
             <button type="submit" tag="button" class="button btn-block">
-              Valider
+              S'inscrire
             </button>
           </div>
-          <!-- <div class="form-group">
+          <div class="form-group">
             <p>
               Vous possedez déjà un compte ?
               <router-link to="/connexion">Connectez-vous</router-link>
             </p>
-          </div> -->
+          </div>
           <p v-if="msg">
             <v-alert text type="error">{{ msg }}</v-alert>
           </p>
@@ -174,7 +174,12 @@
             :timeout="timeout"
             v-model="snack"
             color="success"
-            >Compté créé {{ msg }}</v-snackbar
+            >Compté créé
+            <template v-slot:action="{ attrs }">
+              <v-btn color="white" text v-bind="attrs" @click="gotohome">
+                Se connecter
+              </v-btn>
+            </template></v-snackbar
           >
         </form>
       </div>
@@ -185,7 +190,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "Register",
+  name: "Home",
   data() {
     return {
       itemsActivites: [
@@ -248,7 +253,7 @@ export default {
           remdp: this.remdp,
           email: this.email,
           statut: this.statut,
-          prenoms: this.prenoms,
+          prenom: this.prenoms,
           dateNais: this.dateNais,
           sexe: this.sexe,
           promotion: this.promotion,
@@ -261,8 +266,7 @@ export default {
           .post("http://localhost:3000/api/register", newUser)
           .then((res) => {
             if (res.status === 200) {
-              (this.user_id = ""),
-                (this.mdp = ""),
+              (this.mdp = ""),
                 (this.nom = ""),
                 (this.remdp = ""),
                 (this.email = ""),
@@ -275,6 +279,7 @@ export default {
                 (this.activites = ""),
                 (this.formations = ""),
                 (this.snack = true);
+
               this.msg = "";
             } else {
               this.msg = res.data.msg;

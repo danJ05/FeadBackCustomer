@@ -3,11 +3,7 @@
     <v-tabs :grow="true">
       <v-tab>
         <v-icon>mdi-account</v-icon>
-        Simple utilisateurs
-      </v-tab>
-      <v-tab>
-        <v-icon>mdi-lock</v-icon>
-        Administrateurs
+        clients
       </v-tab>
 
       <v-tab-item>
@@ -134,113 +130,10 @@
                 class="mx-auto"
               ></v-skeleton-loader>
             </div>
-            <div v-else>
-              <v-data-table
-                locale="fr-FR"
-                :headers="headers2"
-                :items="list_admin.listadmin"
-                :sort-by="['nom']"
-                item-key="id"
-                :search="search"
-                class="elevation-0"
-              >
-                <template v-slot:top>
-                  <v-toolbar flat color="white">
-                    <v-spacer></v-spacer>
-                    <v-dialog v-model="dialog" max-width="500px">
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-btn
-                          color="primary"
-                          dark
-                          class="mb-2"
-                          v-bind="attrs"
-                          v-on="on"
-                          >Ajouter un admin</v-btn
-                        >
-                      </template>
-                      <v-card>
-                        <v-card-text>
-                          <v-container>
-                            <v-row>
-                              <v-col cols="12" sm="6" md="6">
-                                <v-text-field
-                                  v-model="editedItem.admin_id"
-                                  label="Identifiant"
-                                ></v-text-field>
-                              </v-col>
-                              <v-col cols="12" sm="6" md="6">
-                                <v-text-field
-                                  v-model="editedItem.mdp"
-                                  :type="'password'"
-                                  label="Mot de passe"
-                                ></v-text-field>
-                              </v-col>
-                              <v-col cols="12" sm="6" md="6">
-                                <v-text-field
-                                  v-model="editedItem.nom"
-                                  label="Nom"
-                                ></v-text-field>
-                              </v-col>
-                              <v-col cols="12" sm="6" md="6">
-                                <v-text-field
-                                  v-model="editedItem.prenoms"
-                                  label="Prenoms"
-                                ></v-text-field>
-                              </v-col>
-                              <v-col cols="12" sm="12" md="12">
-                                <v-text-field
-                                  v-model="editedItem.email"
-                                  :type="'email'"
-                                  label="Email"
-                                ></v-text-field>
-                              </v-col>
-                            </v-row>
-                          </v-container>
-                        </v-card-text>
-
-                        <v-card-actions>
-                          <v-spacer></v-spacer>
-                          <v-btn color="blue darken-1" text @click="close"
-                            >Annuler</v-btn
-                          >
-                          <v-btn color="blue darken-1" text @click="save"
-                            >Enregistrer</v-btn
-                          >
-                        </v-card-actions>
-                      </v-card>
-                    </v-dialog>
-                  </v-toolbar>
-                </template>
-                <template v-slot:[`item.actions`]="{ item }">
-                  <!-- <v-icon small class="mr-2" @click="editItem(item)">
-                  mdi-pencil
-                </v-icon> -->
-                  <v-icon small @click="deleteItem(item)">
-                    mdi-delete
-                  </v-icon>
-                </template>
-              </v-data-table>
-            </div>
           </v-card-text>
         </v-card>
       </v-tab-item>
     </v-tabs>
-    <v-snackbar
-      :bottom="y === 'bottom'"
-      :right="x === 'right'"
-      :timeout="15000"
-      v-model="snack"
-      color="success"
-      >Compté créé</v-snackbar
-    >
-    <v-snackbar
-      :bottom="y === 'bottom'"
-      :right="x === 'left'"
-      :timeout="15000"
-      v-model="snack2"
-      color="error"
-      >{{ msg }}</v-snackbar
-    >
   </div>
 </template>
 
@@ -259,10 +152,7 @@ export default {
       dialog: false,
       list_users: "",
       list_admin: "",
-      item: [
-        { tab: "Simple utilisateurs", content: this.list_users },
-        { tab: "Administrateurs", content: this.list_admin },
-      ],
+      item: [{ tab: "Client", content: this.list_users }],
       headers: [
         {
           text: "#",

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div><h1>Mes préoccupations</h1></div>
     <div v-for="(item, i) in list" :key="i">
       <div class="row">
         <div class="card col-md-6 mx-auto m-4 p-4">
@@ -51,7 +52,10 @@ export default {
       .catch((error) => console.log(error));
   },
   created() {
-    if (localStorage.getItem("token") === null) {
+    if (
+      localStorage.getItem("token") === null ||
+      localStorage.getItem("token") === undefined
+    ) {
       this.$router.push("/connexion");
     } else {
       this.token = localStorage.getItem("token");

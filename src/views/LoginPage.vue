@@ -87,7 +87,7 @@ export default {
         .post("http://localhost:3000/api/login", credentials)
         .then((res) => {
           this.msg = res.data.msg;
-          console.log(res.data.msg);
+          // console.log(res.data.msg);
           if (res.status === 200) {
             localStorage.setItem("token", res.data.token);
             this.$router.push("/user");

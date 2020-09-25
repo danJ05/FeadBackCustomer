@@ -1,5 +1,13 @@
 <template>
   <div class="container-fluid pt-5">
+    <nav class="navbar fixed navbar-expand-lg shadow-none mb-5">
+      <img
+        src="../../assets/Picture1.png"
+        class="my-0 mr-md-auto img-fluid"
+        style="height: 50px"
+        alt="Logo"
+      />
+    </nav>
     <div>
       <div class="col-md-6 mx-auto my-auto">
         <div class="row">
