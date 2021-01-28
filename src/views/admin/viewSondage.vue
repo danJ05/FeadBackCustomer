@@ -31,6 +31,11 @@
 
           <div class="col-md-12">
             <v-card class="mx-auto p-5">
+              <h3 class="font-weight-bold">
+                Il y a eu {{ nb[0].nb }}
+                <span v-if="nb[0].nb > 1">réponses</span>
+                <span v-else>réponse</span>
+              </h3>
               <h4 class="text--primary">
                 Comment evaluez vous la qualité de la prestation réalisée ?
               </h4>
@@ -46,7 +51,7 @@
                       :value="def1[0]"
                       color="red"
                     >
-                      {{ def1[0] }}
+                      {{ getRound(def1[0]) }} %
                     </v-progress-circular>
                   </v-card-text>
                   <span>1 étoile</span>
@@ -63,7 +68,7 @@
                       :value="def1[1]"
                       color="pink"
                     >
-                      {{ def1[1] }}
+                      {{ getRound(def1[1]) }} %
                     </v-progress-circular>
                   </v-card-text>
                   <span>2 étoiles</span>
@@ -80,7 +85,7 @@
                       :value="def1[2]"
                       color="info"
                     >
-                      {{ def1[2] }}
+                      {{ getRound(def1[2]) }} %
                     </v-progress-circular>
                   </v-card-text>
                   <span>3 étoiles</span>
@@ -97,7 +102,7 @@
                       :value="def1[3]"
                       color="primary"
                     >
-                      {{ def1[3] }}
+                      {{ getRound(def1[3]) }} %
                     </v-progress-circular>
                   </v-card-text>
                   <span>4 étoiles</span>
@@ -114,7 +119,7 @@
                       :value="def1[4]"
                       color="success"
                     >
-                      {{ def1[4] }}
+                      {{ getRound(def1[4]) }} %
                     </v-progress-circular>
                   </v-card-text>
                   <span>5 étoiles</span>
@@ -136,7 +141,7 @@
                       :value="def2[0]"
                       color="red"
                     >
-                      {{ def2[0] }}
+                      {{ getRound(def2[0]) }} %
                     </v-progress-circular>
                   </v-card-text>
                   <span>1 étoile</span>
@@ -153,7 +158,7 @@
                       :value="def2[1]"
                       color="pink"
                     >
-                      {{ def2[1] }}
+                      {{ getRound(def2[1]) }} %
                     </v-progress-circular>
                   </v-card-text>
                   <span>2 étoiles</span>
@@ -170,7 +175,7 @@
                       :value="def2[2]"
                       color="info"
                     >
-                      {{ def2[2] }}
+                      {{ getRound(def2[2]) }} %
                     </v-progress-circular>
                   </v-card-text>
                   <span>3 étoiles</span>
@@ -187,7 +192,7 @@
                       :value="def2[3]"
                       color="primary"
                     >
-                      {{ def2[3] }}
+                      {{ getRound(def2[3]) }} %
                     </v-progress-circular>
                   </v-card-text>
                   <span>4 étoiles</span>
@@ -204,10 +209,470 @@
                       :value="def2[4]"
                       color="success"
                     >
-                      {{ def2[4] }}
+                      {{ getRound(def2[4]) }} %
                     </v-progress-circular>
                   </v-card-text>
                   <span>5 étoiles</span>
+                </div>
+              </div>
+
+              <div v-if="result[0].quest_1 !== null">
+                <h4 class="text--primary">
+                  {{ result[0].quest_1 }}
+                </h4>
+                <div class="row mb-4">
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center col-auto"
+                  >
+                    <v-card-text>
+                      <v-progress-circular
+                        :rotate="360"
+                        :size="100"
+                        :width="15"
+                        :value="quest1[0]"
+                        color="red"
+                      >
+                        {{ getRound(quest1[0]) }} %
+                      </v-progress-circular>
+                    </v-card-text>
+                    <span>1 étoile</span>
+                  </div>
+
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center col-auto"
+                  >
+                    <v-card-text>
+                      <v-progress-circular
+                        :rotate="360"
+                        :size="100"
+                        :width="15"
+                        :value="quest1[1]"
+                        color="pink"
+                      >
+                        {{ getRound(quest1[1]) }} %
+                      </v-progress-circular>
+                    </v-card-text>
+                    <span>2 étoiles</span>
+                  </div>
+
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center col-auto"
+                  >
+                    <v-card-text>
+                      <v-progress-circular
+                        :rotate="360"
+                        :size="100"
+                        :width="15"
+                        :value="quest1[2]"
+                        color="info"
+                      >
+                        {{ getRound(quest1[2]) }} %
+                      </v-progress-circular>
+                    </v-card-text>
+                    <span>3 étoiles</span>
+                  </div>
+
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center col-auto"
+                  >
+                    <v-card-text>
+                      <v-progress-circular
+                        :rotate="360"
+                        :size="100"
+                        :width="15"
+                        :value="quest1[3]"
+                        color="primary"
+                      >
+                        {{ getRound(quest1[3]) }} %
+                      </v-progress-circular>
+                    </v-card-text>
+                    <span>4 étoiles</span>
+                  </div>
+
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center col-auto"
+                  >
+                    <v-card-text>
+                      <v-progress-circular
+                        :rotate="360"
+                        :size="100"
+                        :width="15"
+                        :value="quest1[4]"
+                        color="success"
+                      >
+                        {{ getRound(quest1[4]) }} %
+                      </v-progress-circular>
+                    </v-card-text>
+                    <span>5 étoiles</span>
+                  </div>
+                </div>
+              </div>
+
+              <div v-if="result[0].quest_2 !== null">
+                <h4 class="text--primary">
+                  {{ result[0].quest_2 }}
+                </h4>
+                <div class="row mb-4">
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center col-auto"
+                  >
+                    <v-card-text>
+                      <v-progress-circular
+                        :rotate="360"
+                        :size="100"
+                        :width="15"
+                        :value="quest2[0]"
+                        color="red"
+                      >
+                        {{ getRound(quest2[0]) }} %
+                      </v-progress-circular>
+                    </v-card-text>
+                    <span>1 étoile</span>
+                  </div>
+
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center col-auto"
+                  >
+                    <v-card-text>
+                      <v-progress-circular
+                        :rotate="360"
+                        :size="100"
+                        :width="15"
+                        :value="quest2[1]"
+                        color="pink"
+                      >
+                        {{ getRound(quest2[1]) }} %
+                      </v-progress-circular>
+                    </v-card-text>
+                    <span>2 étoiles</span>
+                  </div>
+
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center col-auto"
+                  >
+                    <v-card-text>
+                      <v-progress-circular
+                        :rotate="360"
+                        :size="100"
+                        :width="15"
+                        :value="quest2[2]"
+                        color="info"
+                      >
+                        {{ getRound(quest2[2]) }} %
+                      </v-progress-circular>
+                    </v-card-text>
+                    <span>3 étoiles</span>
+                  </div>
+
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center col-auto"
+                  >
+                    <v-card-text>
+                      <v-progress-circular
+                        :rotate="360"
+                        :size="100"
+                        :width="15"
+                        :value="quest2[3]"
+                        color="primary"
+                      >
+                        {{ getRound(quest2[3]) }} %
+                      </v-progress-circular>
+                    </v-card-text>
+                    <span>4 étoiles</span>
+                  </div>
+
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center col-auto"
+                  >
+                    <v-card-text>
+                      <v-progress-circular
+                        :rotate="360"
+                        :size="100"
+                        :width="15"
+                        :value="quest2[4]"
+                        color="success"
+                      >
+                        {{ getRound(quest2[4]) }} %
+                      </v-progress-circular>
+                    </v-card-text>
+                    <span>5 étoiles</span>
+                  </div>
+                </div>
+              </div>
+
+              <div v-if="result[0].quest_3 !== null">
+                <h4 class="text--primary">
+                  {{ result[0].quest_3 }}
+                </h4>
+                <div class="row mb-4">
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center col-auto"
+                  >
+                    <v-card-text>
+                      <v-progress-circular
+                        :rotate="360"
+                        :size="100"
+                        :width="15"
+                        :value="quest3[0]"
+                        color="red"
+                      >
+                        {{ getRound(quest3[0]) }} %
+                      </v-progress-circular>
+                    </v-card-text>
+                    <span>1 étoile</span>
+                  </div>
+
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center col-auto"
+                  >
+                    <v-card-text>
+                      <v-progress-circular
+                        :rotate="360"
+                        :size="100"
+                        :width="15"
+                        :value="quest3[1]"
+                        color="pink"
+                      >
+                        {{ getRound(quest3[1]) }} %
+                      </v-progress-circular>
+                    </v-card-text>
+                    <span>2 étoiles</span>
+                  </div>
+
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center col-auto"
+                  >
+                    <v-card-text>
+                      <v-progress-circular
+                        :rotate="360"
+                        :size="100"
+                        :width="15"
+                        :value="quest3[2]"
+                        color="info"
+                      >
+                        {{ getRound(quest3[2]) }} %
+                      </v-progress-circular>
+                    </v-card-text>
+                    <span>3 étoiles</span>
+                  </div>
+
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center col-auto"
+                  >
+                    <v-card-text>
+                      <v-progress-circular
+                        :rotate="360"
+                        :size="100"
+                        :width="15"
+                        :value="quest3[3]"
+                        color="primary"
+                      >
+                        {{ getRound(quest3[3]) }} %
+                      </v-progress-circular>
+                    </v-card-text>
+                    <span>4 étoiles</span>
+                  </div>
+
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center col-auto"
+                  >
+                    <v-card-text>
+                      <v-progress-circular
+                        :rotate="360"
+                        :size="100"
+                        :width="15"
+                        :value="quest3[4]"
+                        color="success"
+                      >
+                        {{ getRound(quest3[4]) }} %
+                      </v-progress-circular>
+                    </v-card-text>
+                    <span>5 étoiles</span>
+                  </div>
+                </div>
+              </div>
+
+              <div v-if="result[0].quest_4 !== null">
+                <h4 class="text--primary">
+                  {{ result[0].quest_4 }}
+                </h4>
+                <div class="row mb-4">
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center col-auto"
+                  >
+                    <v-card-text>
+                      <v-progress-circular
+                        :rotate="360"
+                        :size="100"
+                        :width="15"
+                        :value="quest4[0]"
+                        color="red"
+                      >
+                        {{ getRound(quest4[0]) }} %
+                      </v-progress-circular>
+                    </v-card-text>
+                    <span>1 étoile</span>
+                  </div>
+
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center col-auto"
+                  >
+                    <v-card-text>
+                      <v-progress-circular
+                        :rotate="360"
+                        :size="100"
+                        :width="15"
+                        :value="quest4[1]"
+                        color="pink"
+                      >
+                        {{ getRound(quest4[1]) }} %
+                      </v-progress-circular>
+                    </v-card-text>
+                    <span>2 étoiles</span>
+                  </div>
+
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center col-auto"
+                  >
+                    <v-card-text>
+                      <v-progress-circular
+                        :rotate="360"
+                        :size="100"
+                        :width="15"
+                        :value="quest4[2]"
+                        color="info"
+                      >
+                        {{ getRound(quest4[2]) }} %
+                      </v-progress-circular>
+                    </v-card-text>
+                    <span>3 étoiles</span>
+                  </div>
+
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center col-auto"
+                  >
+                    <v-card-text>
+                      <v-progress-circular
+                        :rotate="360"
+                        :size="100"
+                        :width="15"
+                        :value="quest4[3]"
+                        color="primary"
+                      >
+                        {{ getRound(quest4[3]) }} %
+                      </v-progress-circular>
+                    </v-card-text>
+                    <span>4 étoiles</span>
+                  </div>
+
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center col-auto"
+                  >
+                    <v-card-text>
+                      <v-progress-circular
+                        :rotate="360"
+                        :size="100"
+                        :width="15"
+                        :value="quest4[4]"
+                        color="success"
+                      >
+                        {{ getRound(quest4[4]) }} %
+                      </v-progress-circular>
+                    </v-card-text>
+                    <span>5 étoiles</span>
+                  </div>
+                </div>
+              </div>
+
+              <div v-if="result[0].quest_5 !== null">
+                <h4 class="text--primary">
+                  {{ result[0].quest_5 }}
+                </h4>
+                <div class="row mb-4">
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center col-auto"
+                  >
+                    <v-card-text>
+                      <v-progress-circular
+                        :rotate="360"
+                        :size="100"
+                        :width="15"
+                        :value="quest5[0]"
+                        color="red"
+                      >
+                        {{ getRound(quest5[0]) }} %
+                      </v-progress-circular>
+                    </v-card-text>
+                    <span>1 étoile</span>
+                  </div>
+
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center col-auto"
+                  >
+                    <v-card-text>
+                      <v-progress-circular
+                        :rotate="360"
+                        :size="100"
+                        :width="15"
+                        :value="quest5[1]"
+                        color="pink"
+                      >
+                        {{ getRound(quest5[1]) }} %
+                      </v-progress-circular>
+                    </v-card-text>
+                    <span>2 étoiles</span>
+                  </div>
+
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center col-auto"
+                  >
+                    <v-card-text>
+                      <v-progress-circular
+                        :rotate="360"
+                        :size="100"
+                        :width="15"
+                        :value="quest5[2]"
+                        color="info"
+                      >
+                        {{ getRound(quest5[2]) }} %
+                      </v-progress-circular>
+                    </v-card-text>
+                    <span>3 étoiles</span>
+                  </div>
+
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center col-auto"
+                  >
+                    <v-card-text>
+                      <v-progress-circular
+                        :rotate="360"
+                        :size="100"
+                        :width="15"
+                        :value="quest5[3]"
+                        color="primary"
+                      >
+                        {{ getRound(quest5[3]) }} %
+                      </v-progress-circular>
+                    </v-card-text>
+                    <span>4 étoiles</span>
+                  </div>
+
+                  <div
+                    class="d-flex flex-column align-items-center justify-content-center col-auto"
+                  >
+                    <v-card-text>
+                      <v-progress-circular
+                        :rotate="360"
+                        :size="100"
+                        :width="15"
+                        :value="quest5[4]"
+                        color="success"
+                      >
+                        {{ getRound(quest5[4]) }} %
+                      </v-progress-circular>
+                    </v-card-text>
+                    <span>5 étoiles</span>
+                  </div>
                 </div>
               </div>
 
@@ -318,9 +783,15 @@ export default {
       quest5: "",
       dialog: false,
       dialog2: false,
+      nb: "",
     };
   },
   methods: {
+    getRound(num) {
+      var numero = Number(num);
+      var roundedString = numero.toFixed(2);
+      return Number(roundedString);
+    },
     getRating() {},
     async valider() {
       const credentials = {
@@ -372,6 +843,17 @@ export default {
           this.quest3 = res.data.quest3;
           this.quest4 = res.data.quest4;
           this.quest5 = res.data.quest5;
+        }
+      });
+
+    await axios
+      .get(
+        `http://localhost:3000/api/nbReponses/${this.$route.params.id_sondage}`
+      )
+      .then((res) => {
+        if (res.status === 200) {
+          console.log(res.data.result);
+          this.nb = res.data.nb;
         }
       });
 

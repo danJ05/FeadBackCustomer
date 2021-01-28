@@ -41,7 +41,7 @@
                   client a completé un sondage
                 </span>
                 <span v-if="customers_completed_count > 1">
-                  clients ont completé le sondage</span
+                  clients ont completé les sondages</span
                 >
                 <span v-if="customers_completed_count === 0"
                   >Aucun client n'a soumis de sondage</span
@@ -79,7 +79,7 @@
                 :value="total_one"
                 color="red"
               >
-                {{ total_one }}
+                {{ getRound(total_one) }} %
               </v-progress-circular>
             </v-card-text>
             <span>1 étoile</span>
@@ -96,7 +96,7 @@
                 :value="total_two"
                 color="pink"
               >
-                {{ total_two }}
+                {{ getRound(total_two) }} %
               </v-progress-circular>
             </v-card-text>
             <span>2 étoiles</span>
@@ -113,7 +113,7 @@
                 :value="total_three"
                 color="info"
               >
-                {{ total_three }}
+                {{ getRound(total_three) }} %
               </v-progress-circular>
             </v-card-text>
             <span>3 étoiles</span>
@@ -130,7 +130,7 @@
                 :value="total_four"
                 color="primary"
               >
-                {{ total_four }}
+                {{ getRound(total_four) }} %
               </v-progress-circular>
             </v-card-text>
             <span>4 étoiles</span>
@@ -147,7 +147,7 @@
                 :value="total_five"
                 color="success"
               >
-                {{ total_five }}
+                {{ getRound(total_five) }} %
               </v-progress-circular>
             </v-card-text>
             <span>5 étoiles</span>
@@ -172,7 +172,7 @@ vc.addCommands({
         .then((res) => {
           if (res.status === 200) {
             console.log(res.data.customerscompleted[0].clientscompleted);
-            vc.say("c'est fait");
+            // vc.say("c'est fait");
           }
         });
     }
@@ -267,6 +267,12 @@ export default {
   },
 
   methods: {
+    getRound(num) {
+      var numero = Number(num);
+      var roundedString = numero.toFixed(2);
+      return Number(roundedString);
+    },
+
     // hey() {
     //   this.toggle = !this.toggle;
     //   if (this.toggle === true) {
@@ -362,11 +368,41 @@ export default {
 
     await axios.get("http://localhost:3000/api/stats/all").then((res) => {
       var total = res.data;
-      this.total_five = total.total_five;
-      this.total_four = total.total_four;
-      this.total_three = total.total_three;
-      this.total_two = total.total_two;
-      this.total_one = total.total_one;
+      this.total_five =
+        (total.total_five * 100) /
+        (total.total_five +
+          total.total_four +
+          total.total_three +
+          total.total_two +
+          total.total_one);
+      this.total_four =
+        (total.total_four * 100) /
+        (total.total_five +
+          total.total_four +
+          total.total_three +
+          total.total_two +
+          total.total_one);
+      this.total_three =
+        (total.total_three * 100) /
+        (total.total_five +
+          total.total_four +
+          total.total_three +
+          total.total_two +
+          total.total_one);
+      this.total_two =
+        (total.total_two * 100) /
+        (total.total_five +
+          total.total_four +
+          total.total_three +
+          total.total_two +
+          total.total_one);
+      this.total_one =
+        (total.total_one * 100) /
+        (total.total_five +
+          total.total_four +
+          total.total_three +
+          total.total_two +
+          total.total_one);
     });
 
     await axios.get(`http://localhost:3000/api/stats/customers`).then((res) => {

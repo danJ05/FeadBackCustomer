@@ -49,6 +49,7 @@
             {{ list.quest_1 }}
             <v-rating
               v-model="rating1"
+              :large="true"
               background-color="orange lighten-3"
               color="orange"
             ></v-rating>
@@ -62,6 +63,7 @@
             {{ list.quest_2 }}
             <v-rating
               v-model="rating2"
+              :large="true"
               background-color="orange lighten-3"
               color="orange"
             ></v-rating>
@@ -75,6 +77,7 @@
             {{ list.quest_3 }}
             <v-rating
               v-model="rating3"
+              :large="true"
               background-color="orange lighten-3"
               color="orange"
             ></v-rating>
@@ -88,6 +91,7 @@
             {{ list.quest_4 }}
             <v-rating
               v-model="rating4"
+              :large="true"
               background-color="orange lighten-3"
               color="orange"
             ></v-rating>
@@ -101,6 +105,7 @@
             {{ list.quest_5 }}
             <v-rating
               v-model="rating5"
+              :large="true"
               background-color="orange lighten-3"
               color="orange"
             ></v-rating>
